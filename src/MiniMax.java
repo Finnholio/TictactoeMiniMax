@@ -32,7 +32,6 @@ public class MiniMax {
                 bestOption = options.get(i);
             }
         }
-
         return bestOption;
     }
 
@@ -57,18 +56,23 @@ public class MiniMax {
             }
         }
         //return score for option
+        for (int i = 0; i < optionsScores.size(); i++){
+            System.out.println(Arrays.toString(options.get(i)));
+            System.out.println(optionsScores.get(i));
+        }
+
 
         for (int i = 0; i < optionsScores.size(); i++){
             if (optionsScores.get(i) == whosTurn){
+                System.out.println(whosTurn + "\n\n");
                 return whosTurn;
             }
-        }
-        for (int i = 0; i < optionsScores.size(); i++){
-            if (optionsScores.get(i) == 0){
+            else if (optionsScores.get(i) == 0){
+                System.out.println(0 + "\n\n");
                 return 0;
             }
         }
-
+        System.out.println((whosTurn*-1) + "\n\n");
         return whosTurn * -1;
     }
 

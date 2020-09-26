@@ -59,7 +59,7 @@ public class Tictactoe {
         }
 
     }
-    
+
     public static void playingWithAI(){
         //rules
         System.out.println("");
@@ -180,67 +180,20 @@ public class Tictactoe {
     }
 
     public static int check_winner(int[][] game){
-        //diagonal player 1 wins
-        if(game[0][0] == -1 && game[1][1] == -1 && game[2][2] == -1){
-            return -1;
+      for (int i = 0; i < 3; i++){
+        if (game[i][0] == game[i][1] && game[i][1] == game[i][2] && game[i][0] != 0){
+          return game[i][0];
         }
-        else if(game[0][2] == -1 && game[1][1] == -1 && game[2][0] == -1){
-            return -1;
+        else if (game[0][i] == game[1][i] && game[1][i] == game[2][i] && game[0][i] != 0){
+          return game[0][i];
         }
-
-        //horizontal player 1 wins
-        else if(game[0][0] == -1 && game[1][0] == -1 && game[2][0] == -1){
-            return -1;
-        }
-        else if(game[0][1] == -1 && game[1][1] == -1 && game[2][1] == -1){
-            return -1;
-        }
-        else if(game[0][2] == -1 && game[1][2] == -1 && game[2][2] == -1){
-            return -1;
-        }
-
-        //verticle player 1 wins
-        else if(game[0][0] == -1 && game[0][1] == -1 && game[0][2] == -1){
-            return -1;
-        }
-        else if(game[1][0] == -1 && game[1][1] == -1 && game[1][2] == -1){
-            return -1;
-        }
-        else if(game[2][0] == -1 && game[2][1] == -1 && game[2][2] == -1){
-            return -1;
-        }
-
-        //diagonal player 2 wins
-        if(game[0][0] == 1 && game[1][1] == 1 && game[2][2] == 1){
-            return 1;
-        }
-        else if(game[0][2] == 1 && game[1][1] == 1 && game[2][0] == 1){
-            return 1;
-        }
-
-        //horizontal player 2 wins
-        else if(game[0][0] == 1 && game[1][0] == 1 && game[2][0] == 1){
-            return 1;
-        }
-        else if(game[0][1] == 1 && game[1][1] == 1 && game[2][1] == 1){
-            return 1;
-        }
-        else if(game[0][2] == 1 && game[1][2] == 1 && game[2][2] == 1){
-            return 1;
-        }
-
-        //verticle player 2 wins
-        else if(game[0][0] == 1 && game[0][1] == 1 && game[0][2] == 1){
-            return -1;
-        }
-        else if(game[1][0] == 1 && game[1][1] == 1 && game[1][2] == 1){
-            return -1;
-        }
-        else if(game[2][0] == 1 && game[2][1] == 1 && game[2][2] == 1){
-            return -1;
-        }
-        else{
-            return 0;
-        }
+      }
+      if (game[0][0] == game[1][1] && game[1][1] == game[2][2] && game[0][0] != 0){
+        return game[0][0];
+      }
+      else if (game[0][2] == game[1][1] && game[1][1] == game[2][0] && game[0][2] != 0){
+        return game[0][2];
+      }
+      return 0;
     }
 }

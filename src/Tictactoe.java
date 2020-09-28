@@ -46,67 +46,7 @@ public class Tictactoe {
 
     }
 
-    public static void playingWithAI(){
-        //rules
-        System.out.println("");
-
-        boolean playingGame = true;
-        int whosTurn = -1;
-        int[][] game = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-
-        //main game loop
-        while(playingGame){
-            if (whosTurn == -1){
-                if(check_winner(game) == -1){
-                    System.out.println("Player 1 Wins!!");
-                    playingGame = false;
-                }
-                else if(check_winner(game) == 1){
-                    System.out.println("Player 2 Wins!!");
-                    playingGame = false;
-                }
-                else {
-                    printGameState(game);
-
-                    //get input
-                    if(check_winner(game) == -1){
-                        System.out.println("Player 1's Turn : ");
-                    }
-                    else if(check_winner(game) == 1) {
-                        System.out.println("Player 2's Turn : ");
-                    }
-
-                    //place new piece
-                    boolean no_piece_placed = true;
-                    while(no_piece_placed){
-                        int[] newPiecePosition = getInput();
-                        if(game[newPiecePosition[0]][newPiecePosition[1]] == 0){
-                            game[newPiecePosition[0]][newPiecePosition[1]] = whosTurn;
-                            no_piece_placed = false;
-                        }
-                        else {
-                            System.out.println("ERROR : PIECE PLACEMENT  INVALID");
-                            System.out.println("\n\n");
-                        }
-
-                    }
-
-                    //switch turn
-                    if (whosTurn == -1){
-                        whosTurn = 1;
-                    }
-                    else {
-                        whosTurn = -1;
-                    }
-
-                    //space between lines
-                    System.out.println("\n\n");
-                }
-            }
-        }
-    }
-
-    private static int[] getInput(){
+    public static int[] getInput(){
         Scanner inputScanner = new Scanner(System.in);
         char inputText[] = inputScanner.next().toCharArray();
 

@@ -1,4 +1,5 @@
 import java.util.*;
+impoty Move;
 
 public class MiniMax {
     public static void main(String args[]){
@@ -6,14 +7,32 @@ public class MiniMax {
         System.out.println(Arrays.toString(startMinimax(game)));
     }
 
-
-    public static int[] startMinimax(int[][] game){
+    public static Move startMinimax(int[][] game){
         //find all options
-        List<int[]> options = findAllOptions(game);
+        List<Move> allMoves = findAllMoves(game);
+
         //run miniMax on all options
         List<Integer> scores = new ArrayList<>();
         int bestScore = -2;
-        int[] bestOption = new int[2];
+        int[] bestMove = new int[2];
+
+
+        for(move : allMoves) {
+            /* newboard = changeBoard(board, move);
+               score = scoreboard(newboard);
+               if (score == 0 )
+                  score = minimax(newboard, other_player);
+
+               if score == win
+                  return move;
+
+               if score > bestScore {
+                  bestScore = score;
+                  bestMove = move;
+               }
+               */
+        }
+
 
         for (int i = 0; i < options.size(); i++){
             int[][] tempGame = new int[3][3];
@@ -37,7 +56,7 @@ public class MiniMax {
 
     public static int miniMax(int[][] game, int whosTurn){
         //find all options
-        List<int[]> options = findAllOptions(game);
+        List<Move> options = findAllOptions(game);
         List<Integer> optionsScores = new ArrayList<>();
 
         //check for winners
@@ -76,16 +95,14 @@ public class MiniMax {
         return whosTurn * -1;
     }
 
-    public static List<int[]> findAllOptions(int[][] game){
-        List<int[]> allOptions = new ArrayList<int[]>();
+    public static List<Move> findAllMoves(int[][] game){
+        List<Move> allMoves = new ArrayList<Move>();
         for (int i = 0; i < game.length; i++){
             for (int j = 0; j < game[i].length; j++){
-                if (game[i][j] == 0){
-                    int[] option = {i, j};
-                    allOptions.add(option);
-                }
+                if (game[i][j] == 0)
+                    allOptions.add( new Move{i,j} );
             }
         }
-        return allOptions;
+        return allMoves;
     }
 }

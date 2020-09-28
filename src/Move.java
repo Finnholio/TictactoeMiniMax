@@ -1,0 +1,1 @@
+public class Move extends int[2] { }

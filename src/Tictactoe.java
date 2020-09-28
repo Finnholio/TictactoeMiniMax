@@ -5,57 +5,43 @@ public class Tictactoe {
         //rules
         System.out.println("");
 
-        boolean playingGame = true;
         int whosTurn = -1;
         int[][] game = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
         //main game loop
-        while(playingGame){
+        while(true){
             if(check_winner(game) == -1){
                 System.out.println("Player 1 Wins!!");
-                playingGame = false;
+                break;
             }
-            else if(check_winner(game) == 1){
+
+            if(check_winner(game) == 1){
                 System.out.println("Player 2 Wins!!");
-                playingGame = false;
+                break;
             }
-            else {
-                printGameState(game);
 
-                //get input
-                if(check_winner(game) == -1){
-                    System.out.println("Player 1's Turn : ");
-                }
-                else if(check_winner(game) == 1) {
-                    System.out.println("Player 2's Turn : ");
-                }
+            printGameState(game);
 
-                //place new piece
-                boolean no_piece_placed = true;
-                while(no_piece_placed){
-                    int[] newPiecePosition = getInput();
-                    if(game[newPiecePosition[0]][newPiecePosition[1]] == 0){
-                        game[newPiecePosition[0]][newPiecePosition[1]] = whosTurn;
-                        no_piece_placed = false;
-                    }
-                    else {
-                        System.out.println("ERROR : PIECE PLACEMENT  INVALID");
-                        System.out.println("\n\n");
-                    }
-
-                }
-
-                //switch turn
-                if (whosTurn == -1){
-                    whosTurn = 1;
+            //place new piece
+            boolean no_piece_placed = true;
+            while(no_piece_placed){
+                int[] newPiecePosition = getInput();
+                if(game[newPiecePosition[0]][newPiecePosition[1]] == 0){
+                    game[newPiecePosition[0]][newPiecePosition[1]] = whosTurn;
+                    no_piece_placed = false;
                 }
                 else {
-                    whosTurn = -1;
+                    System.out.println("ERROR : PIECE PLACEMENT  INVALID");
+                    System.out.println("\n\n");
                 }
 
-                //space between lines
-                System.out.println("\n\n");
             }
+
+            //switch turn
+            whosTurn *= -1;
+
+            //space between lines
+            System.out.println("\n\n");
         }
 
     }
@@ -120,7 +106,7 @@ public class Tictactoe {
         }
     }
 
-    public static int[] getInput(){
+    private static int[] getInput(){
         Scanner inputScanner = new Scanner(System.in);
         char inputText[] = inputScanner.next().toCharArray();
 
@@ -179,21 +165,27 @@ public class Tictactoe {
         System.out.println(gameRead[0][2] + "|" + gameRead[1][2] + "|" + gameRead[2][2]);
     }
 
-    public static int check_winner(int[][] game){
+    private static int check_winner(int[][] game){
       for (int i = 0; i < 3; i++){
-        if (game[i][0] == game[i][1] && game[i][1] == game[i][2] && game[i][0] != 0){
-          return game[i][0];
-        }
-        else if (game[0][i] == game[1][i] && game[1][i] == game[2][i] && game[0][i] != 0){
+        // check a row
+        if (game[i][0] == game[i][1] && game[i][1] == game[i][2] && game[i][0] != 0)
+          return game[i][0]
+
+        // check a column
+        if (game[0][i] == game[1][i] && game[1][i] == game[2][i] && game[0][i] != 0){
           return game[0][i];
         }
       }
-      if (game[0][0] == game[1][1] && game[1][1] == game[2][2] && game[0][0] != 0){
+
+      // check diagonal 1
+      if (game[0][0] == game[1][1] && game[1][1] == game[2][2] && game[0][0] != 0)
         return game[0][0];
-      }
-      else if (game[0][2] == game[1][1] && game[1][1] == game[2][0] && game[0][2] != 0){
+
+      // check diagonal 2
+      if (game[0][2] == game[1][1] && game[1][1] == game[2][0] && game[0][2] != 0)
         return game[0][2];
-      }
+
+      // no winner
       return 0;
     }
-}
+ }
